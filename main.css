@@ -1,0 +1,98 @@
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
+
+body {
+  background-image: url("images/menu-background.jpg")
+}
+
+#logo {
+  position: relative;
+  margin: auto 0;
+  width: 400px;
+  padding: 10px;
+
+}
+
+#logo2 {
+  position: relative;
+  align-self: center;
+  margin: auto 0;
+  padding: 30px;
+}
+
+#logo-container{
+  text-align: center;
+}
+
+
+#single {
+  position: relative;
+  margin: 0 auto;
+  align-self: center;
+  height:50px;
+  width: 400px;
+  background: #5f4b05;
+  text-align:center;
+  font-size:30px;
+  background-size: 1px 300%;
+  -webkit-transition:0.5s;
+  transition:0.5s;
+  color: #3aff30;
+  font-family:shadows into light;
+  cursor:pointer;
+}
+
+#single:hover {
+  background: #000000;
+  color: #ff0202;
+-webkit-transform:rotate(-1deg);
+  transform:rotate(-2deg);
+}
+
+#credits:hover {
+  background: #000000;
+  color: #ff0000;
+  -webkit-transform:rotate(-2deg);
+  transform:rotate(-2deg);
+
+}
+
+#credits {
+  height:50px;
+  width:400px;
+  position:relative;
+  margin: 0 auto;
+  background: #5f4b05;
+  font-size:30px;
+  text-align:center;
+  font-family:shadows into light;
+  color: #3aff30;
+   -webkit-transition:0.5s;
+  transition:0.5s;
+  cursor:pointer;
+
+}
+
+#high-score {
+  position: relative;
+  margin: 0 auto;
+  align-self: center;
+  height:50px;
+  width: 400px;
+  background: #5f4b05;
+  text-align:center;
+  font-size:30px;
+  background-size: 1px 300%;
+  -webkit-transition:0.5s;
+  transition:0.5s;
+  color: #3aff30;
+  font-family:shadows into light;
+  cursor:pointer;
+}
+
+#high-score:hover {
+  background: #000000;
+  color: #ff0000;
+  -webkit-transform:rotate(-2deg);
+  transform:rotate(-2deg);
+
+}

@@ -2,6 +2,25 @@ initGame();
 
 function initGame() {
 
-    // Your game can start here, but define separate functions, don't write everything in here :)
+    const singlePlayer = document.querySelector('.single')
+
+    function newGame(){
+        singlePlayer.addEventListener('click', function(){
+            newGame()
+        })
+        console.log("newGame")
+    }
+    function showCredits(){
+
+    }
+    function goBack(){
+
+    }
+    function showHighScore(){
+
+    }
+
+
+
 
 }
