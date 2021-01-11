@@ -1,30 +1,72 @@
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
 body {
-  background-image: url("images/menu-background.jpg")
+  background-image: url("images/menu-background.jpg");
+  background-size: cover;
+
 }
 
-#logo {
+.choose {
+  margin: 0 auto;
+  font-family:shadows into light;
+  font-size: 60px;
+  width: 1000px;
+  color: #3aff30;
+  background: #5f4b05;
+}
+
+.ship-choose {
+  display: none;
+  text-align: center;
+}
+
+.xwing {
+  height: 120px;
+  padding: 80px
+}
+
+.xwing {
+  position: relative;
+  height: 150px;
+}
+
+.xwing:hover, .slave:hover, .falcon:hover {
+  transform: scale(1.5);
+}
+
+.slave {
+  height: 200px;
+  padding: 80px
+}
+
+.falcon {
+  height: 200px;
+  padding: 80px
+}
+
+
+.logo-container{
+  text-align: center;
+  display: block;
+}
+
+.logo {
   position: relative;
   margin: auto 0;
   width: 400px;
   padding: 10px;
-
+  top: 40px
 }
 
-#logo2 {
+.logo2 {
   position: relative;
   align-self: center;
   margin: auto 0;
   padding: 30px;
+  top: 20px;
 }
 
-#logo-container{
-  text-align: center;
-}
-
-
-#single {
+.single, .credits, .high-score {
   position: relative;
   margin: 0 auto;
   align-self: center;
@@ -41,58 +83,9 @@ body {
   cursor:pointer;
 }
 
-#single:hover {
+.single:hover, .credits:hover, .high-score:hover {
   background: #000000;
   color: #ff0202;
--webkit-transform:rotate(-1deg);
+  -webkit-transform:rotate(-1deg);
   transform:rotate(-2deg);
-}
-
-#credits:hover {
-  background: #000000;
-  color: #ff0000;
-  -webkit-transform:rotate(-2deg);
-  transform:rotate(-2deg);
-
-}
-
-#credits {
-  height:50px;
-  width:400px;
-  position:relative;
-  margin: 0 auto;
-  background: #5f4b05;
-  font-size:30px;
-  text-align:center;
-  font-family:shadows into light;
-  color: #3aff30;
-   -webkit-transition:0.5s;
-  transition:0.5s;
-  cursor:pointer;
-
-}
-
-#high-score {
-  position: relative;
-  margin: 0 auto;
-  align-self: center;
-  height:50px;
-  width: 400px;
-  background: #5f4b05;
-  text-align:center;
-  font-size:30px;
-  background-size: 1px 300%;
-  -webkit-transition:0.5s;
-  transition:0.5s;
-  color: #3aff30;
-  font-family:shadows into light;
-  cursor:pointer;
-}
-
-#high-score:hover {
-  background: #000000;
-  color: #ff0000;
-  -webkit-transform:rotate(-2deg);
-  transform:rotate(-2deg);
-
 }

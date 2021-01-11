@@ -4,20 +4,30 @@
     <title>Star Wars Pew Pew</title>
     <meta charset="UTF-8">
     <!-- http://proger.i-forge.net/The_smallest_transparent_pixel/ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=">
     <link rel="stylesheet" type="text/css" href="main.css" media="screen"/>
-    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="game.js" defer></script>
 </head>
 <body>
-<div id="logo-container">
-    <img id="logo" src="images/starwars-logo.svg"><br>
-    <img id="logo2" src="images/pew-pew.png">
-    <div id="single">SINGLE PLAYER</div>
-    <br>
-    <div id="credits">CREDITS</div>
-    <br>
-    <div id="high-score">HIGH SCORE</div>
+<div class="logo-container">
+    <div class="images">
+        <img class="logo" src="images/starwars-logo.svg"><br>
+        <img class="logo2" src="images/pew-pew.png">
     </div>
+    <div class="single">SINGLE PLAYER</div>
+    <br>
+    <div class="credits">CREDITS</div>
+    <br>
+    <div class="high-score">HIGH SCORE</div>
+    </div>
+
+<div class="ship-choose">
+    <h1 class="choose">CHOOSE YOUR SHIP:</h1>
+    <img id="ship" class="xwing" src="images/xwing.png">
+    <img id="ship2" class="slave" src="images/slave.png">
+    <img id="ship3" class="falcon" src="images/falcon.png">
+</div>
 
 
   </body>
