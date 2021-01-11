@@ -20,26 +20,29 @@ body {
   text-align: center;
 }
 
-.xwing {
+#xwing {
   height: 120px;
   padding: 80px
 }
 
-.xwing {
-  position: relative;
-  height: 150px;
+.vertical{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.xwing:hover, .slave:hover, .falcon:hover {
+#xwing:hover, #slave:hover, #falcon:hover {
   transform: scale(1.5);
 }
 
-.slave {
+#slave {
   height: 200px;
   padding: 80px
 }
 
-.falcon {
+#falcon {
   height: 200px;
   padding: 80px
 }

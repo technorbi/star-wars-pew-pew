@@ -6,10 +6,14 @@ function initGame() {
     const highScoreButton = document.querySelector('.high-score');
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
+    const shipDevContainer = document.querySelector('.ship-choose')
 
     singlePlayerButton.addEventListener("click", startGame)
 
-    function drawShip() {
+    function drawShip(theChosenOne) {
+        const playerShip = document.querySelector(theChosenOne)
+        playerShip.style.transform = 'scale(1)'
+        playerShip.style.margin = 'auto'
 
     }
 
@@ -26,39 +30,39 @@ function initGame() {
 
     }
 
-    function chooseShip(){
+    function chooseShip() {
 
         // Display
         const shipChoose = document.querySelector('.ship-choose')
+
         shipChoose.style.display = 'block'
 
         // Select ships
-        const xWing = document.querySelector('.xwing')
-        const slaveOne = document.querySelector('.slave')
-        const milleniumFalcon = document.querySelector('.falcon')
+        const ships = document.querySelectorAll('.ship')
 
         // Eventlisteners
         let chosenShip = ''
-        xWing.addEventListener('click', chooseShip)
-        slaveOne.addEventListener('click', chooseShip)
-        milleniumFalcon.addEventListener('click', chooseShip)
 
-        console.log(chosenShip)
+        for (let ship of ships) {
+            ship.addEventListener('click', function () {
+                chosenShip = ship.getAttribute('id')
 
-        // Ship choose
-        function chooseShip() {
-            chosenShip = // TODO ship id!!!
+                // Hide other ships
+                let theChosenOne = ''
+                theChosenOne = '#' + chosenShip
+                drawShip(theChosenOne)
+                for (let shipStyle of ships) {
+                    if ('#' + shipStyle.getAttribute('id') !== theChosenOne) {
+                        shipStyle.style.display = 'none'
+                        document.querySelector('.choose').style.display = 'none'
+                        shipDevContainer.style.textAlign = 'left'
+                        shipDevContainer.className += ' vertical'
 
-            // Hide container
-            shipChoose.style.display = 'none'
 
-            return chosenShip
+                    }
+                }
+            })
         }
-
-
-
-
-
     }
 
     function showCredits(){
@@ -70,8 +74,5 @@ function initGame() {
     function showHighScore(){
 
     }
-
-
-
 
 }
