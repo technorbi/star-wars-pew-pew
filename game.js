@@ -14,7 +14,10 @@ function initGame() {
         const playerShip = document.querySelector(theChosenOne)
         playerShip.style.transform = 'scale(1)'
         playerShip.style.margin = 'auto'
-
+        let audio = new Audio('sounds/xwing-fly.mp3')
+        audio.volume = 0.07
+        audio.loop = true
+        audio.play()
     }
 
     function startGame(){
@@ -65,12 +68,10 @@ function initGame() {
         }
     }
 
-    function showCredits(){
-
-    }
     function goBack(){
 
     }
+
     function showHighScore(){
 
     }
