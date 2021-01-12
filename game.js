@@ -8,7 +8,6 @@ function initGame() {
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
-    const theChosenOne = ''
     singlePlayerButton.addEventListener("click", startGame)
 
 
@@ -38,12 +37,9 @@ function initGame() {
         chooseShip()
 
     }
-
-    function chooseShip(theChosenOne) {
-
     move()
 
-    function chooseShip() {
+    function chooseShip(theChosenOne) {
 
         // Display
         const shipChoose = document.querySelector('.ship-choose')
@@ -75,18 +71,18 @@ function initGame() {
         }
     }
 
-    function goBack(){
+    function goBack() {
 
     }
 
-    function showHighScore(){
+    function showHighScore() {
 
     }
 
     function move() {
         let playerShip = document.querySelector('.ship-choose');
         let moveBy = 15;
-            window.addEventListener('load', () => {
+        window.addEventListener('load', () => {
             playerShip.style.position = 'absolute';
             playerShip.style.left = 0;
             playerShip.style.top = 0;
@@ -103,5 +99,5 @@ function initGame() {
                     break;
             }
         });
-        }
+    }
 }
