@@ -26,13 +26,13 @@ function initGame() {
         const laser = document.querySelector('.laser-shoot')
         const fps = 10
         let left = laser.getAttribute('left')
+        left = parseInt(left)
+        console.log(left)
         laser.style.display = 'block'
         laser.style.left = left + 'px'
         left += 1
         laser.setAttribute('left', left)
-        if (left < 1842){
-            setTimeout(() => requestAnimationFrame(shootLaser), 1000/fps)
-        }
+        setTimeout(() => requestAnimationFrame(shootLaser), 1000/fps)
     }
 
 
