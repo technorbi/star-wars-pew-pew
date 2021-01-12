@@ -32,11 +32,12 @@ function initGame() {
 
         laser.classList.remove('hidden')
         let left = laser.offsetLeft
-        left += 20
+        left += 5
         laser.style.left = left + 'px'
-        laser.style.top = shipTop - 10 + 'px'
         if (laser.offsetLeft > 350) {
             laser.offsetTop = originalShootTop
+        } else {
+            laser.style.top = shipTop - 10 + 'px'
         }
         if (laser.offsetLeft < 2000) {
             requestAnimationFrame(shootLaser)
