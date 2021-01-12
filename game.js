@@ -12,6 +12,7 @@ function initGame() {
 
 
     function drawShip(theChosenOne) {
+        document.body.style.backgroundImage = 'url(images/level1.jpg)'
         const playerShip = document.querySelector(theChosenOne)
         playerShip.style.transform = 'scale(1)'
         playerShip.style.margin = 'auto'
@@ -21,15 +22,20 @@ function initGame() {
         // audio.play()
     }
 
-    function shooting() {
+    const shootLaser = () => {
         const laser = document.querySelector('.laser-shoot')
-        laser.style.display = 'block'
+        const fps = 10
         let left = laser.getAttribute('left')
-        setInterval(function (){
-            left += 25
-            laser.style.left = left + 'px'
-        }, 10)
+        laser.style.display = 'block'
+        laser.style.left = left + 'px'
+        left += 1
+        laser.setAttribute('left', left)
+        if (left < 1842){
+            setTimeout(() => requestAnimationFrame(shootLaser), 1000/fps)
+        }
     }
+
+
     function startGame(){
 
         // Hide Menu
@@ -40,7 +46,6 @@ function initGame() {
             logoContainer.style.display = "none";
             }
         chooseShip()
-
     }
     move()
 
@@ -106,7 +111,7 @@ function initGame() {
                     }
                     break;
                 case ' ':
-                    shooting()
+                    requestAnimationFrame(shootLaser)
                     break;
             }
         });
