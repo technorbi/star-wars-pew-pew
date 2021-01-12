@@ -22,14 +22,28 @@ function initGame() {
         // audio.play()
     }
 
-    const shootLaser = () => {
+    const originalShootTop = shipDevContainer.offsetTop - 10 + 'px'
+
+    function shootLaser() {
+        const laserContainer = document.querySelector('.laser-container')
         const laser = document.querySelector('.laser-shoot')
-        const style = getComputedStyle(laser)
-        let left = parseInt(style.left.split('px')[0])
-        laser.style.display = 'block'
+
+        let shipTop = shipDevContainer.offsetTop
+
+        laser.classList.remove('hidden')
+        let left = laser.offsetLeft
+        left += 20
         laser.style.left = left + 'px'
-        left += 1
-        requestAnimationFrame(shootLaser)
+        laser.style.top = shipTop - 10 + 'px'
+        if (laser.offsetLeft > 350) {
+            laser.offsetTop = originalShootTop
+        }
+        if (laser.offsetLeft < 2000) {
+            requestAnimationFrame(shootLaser)
+        }
+        if (laser.offsetLeft > 2000) {
+            laserContainer.innerHTML =  '';
+        }
     }
 
 
@@ -108,6 +122,8 @@ function initGame() {
                     }
                     break;
                 case ' ':
+                    const laserContainer = document.querySelector('.laser-container')
+                    laserContainer.innerHTML += `<img class="laser-shoot hidden"  src="images/laser.png">`;
                     requestAnimationFrame(shootLaser)
                     break;
             }

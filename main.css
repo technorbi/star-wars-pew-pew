@@ -14,7 +14,6 @@ body {
 
 
 .laser-shoot{
-  display: none;
   height: 30px;
   margin: 0;
   position: absolute;
@@ -22,6 +21,10 @@ body {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   left: 330px;
+}
+
+.hidden{
+  display: none;
 }
 
 .choose {
