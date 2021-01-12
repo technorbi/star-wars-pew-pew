@@ -32,7 +32,7 @@ function initGame() {
 
         laser.classList.remove('hidden')
         let left = laser.offsetLeft
-        left += 5
+        left += 20
         laser.style.left = left + 'px'
         if (laser.offsetLeft > 350) {
             laser.offsetTop = originalShootTop
@@ -115,11 +115,13 @@ function initGame() {
                 case ('ArrowUp'):
                     if (playerShip.style.top !== '10%') {
                         playerShip.style.top = parseInt(playerShip.style.top) - moveBy + '%';
+                        document.querySelector('#xwing').src = 'images/xwing-up.png'
                     }
                     break;
                 case 'ArrowDown':
                     if (playerShip.style.top !== '90%') {
                         playerShip.style.top = parseInt(playerShip.style.top) + moveBy + '%';
+                        document.querySelector("#xwing").src = 'images/xwing-down.png'
                     }
                     break;
                 case ' ':
