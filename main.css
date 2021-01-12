@@ -1,17 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
+
 body {
   background-image: url("images/menu-background.jpg");
   background-size: cover;
 }
+
 
 .stop-scrolling {
   height: 100%;
   overflow: hidden;
 }
 
-.laser-container{
-}
 
 .laser-shoot{
   display: none;
