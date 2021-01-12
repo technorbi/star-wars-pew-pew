@@ -2,6 +2,7 @@ initGame();
 
 function initGame() {
 
+    const theChosenOne = ''
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
     const creditsButton = document.querySelector('.credits');
@@ -10,6 +11,7 @@ function initGame() {
 
     singlePlayerButton.addEventListener("click", startGame)
 
+
     function drawShip(theChosenOne) {
         const playerShip = document.querySelector(theChosenOne)
         playerShip.style.transform = 'scale(1)'
@@ -17,7 +19,12 @@ function initGame() {
         let audio = new Audio('sounds/xwing-fly.mp3')
         audio.volume = 0.07
         audio.loop = true
-        audio.play()
+        // audio.play()
+    }
+
+    function drawShoot() {
+        const laser = document.querySelector('.laser-container')
+        laser.style.display = 'block'
     }
 
     function startGame(){
@@ -33,7 +40,7 @@ function initGame() {
 
     }
 
-    function chooseShip() {
+    function chooseShip(theChosenOne) {
 
         // Display
         const shipChoose = document.querySelector('.ship-choose')
@@ -51,7 +58,6 @@ function initGame() {
                 chosenShip = ship.getAttribute('id')
 
                 // Hide other ships
-                let theChosenOne = ''
                 theChosenOne = '#' + chosenShip
                 drawShip(theChosenOne)
                 for (let shipStyle of ships) {
@@ -60,8 +66,6 @@ function initGame() {
                         document.querySelector('.choose').style.display = 'none'
                         shipDevContainer.style.textAlign = 'left'
                         shipDevContainer.className += ' vertical'
-
-
                     }
                 }
             })
