@@ -21,9 +21,14 @@ function initGame() {
         // audio.play()
     }
 
-    function drawShoot() {
-        const laser = document.querySelector('.laser-container')
+    function shooting() {
+        const laser = document.querySelector('.laser-shoot')
         laser.style.display = 'block'
+        let left = laser.getAttribute('left')
+        setInterval(function (){
+            left += 25
+            laser.style.left = left + 'px'
+        }, 10)
     }
     function startGame(){
 
@@ -81,21 +86,27 @@ function initGame() {
 
     function move() {
         let playerShip = document.querySelector('.ship-choose');
-        let moveBy = 15;
+        let moveBy = 10;
         window.addEventListener('load', () => {
-            playerShip.style.position = 'absolute';
             playerShip.style.left = 0;
-            playerShip.style.top = 0;
+            playerShip.style.top = '50%';
         });
 
 
         window.addEventListener('keyup', (e) => {
             switch (e.key) {
-                case 'ArrowUp':
-                    playerShip.style.top = parseInt(playerShip.style.top) - moveBy + 'px';
+                case ('ArrowUp'):
+                    if (playerShip.style.top !== '10%') {
+                        playerShip.style.top = parseInt(playerShip.style.top) - moveBy + '%';
+                    }
                     break;
                 case 'ArrowDown':
-                    playerShip.style.top = parseInt(playerShip.style.top) + moveBy + 'px';
+                    if (playerShip.style.top !== '90%') {
+                        playerShip.style.top = parseInt(playerShip.style.top) + moveBy + '%';
+                    }
+                    break;
+                case ' ':
+                    shooting()
                     break;
             }
         });

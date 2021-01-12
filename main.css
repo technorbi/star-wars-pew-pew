@@ -5,14 +5,20 @@ body {
   background-size: cover;
 }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
 .laser-shoot{
   display: none;
-  height: 20px;
+  height: 30px;
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 49%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  left: 330px;
 }
 
 .choose {
