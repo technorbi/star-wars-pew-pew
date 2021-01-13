@@ -114,11 +114,15 @@ body {
   transform:rotate(-2deg);
 }
 
-.enemy {
+.enemy-container {
   position: absolute;
   left: 1500px;
   top: 50%;
   width: 100px;
   height: 100px;
   text-align: right;
+}
+
+.enemy {
+  height: 100px;
 }
