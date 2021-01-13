@@ -7,7 +7,7 @@ function initGame() {
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
-    const enemyShip = document.querySelector('.enemy');
+    const enemyDevContainer = document.querySelector('.enemy-container');
     let objects = []
     singlePlayerButton.addEventListener("click", startGame)
 
@@ -48,15 +48,15 @@ function initGame() {
     }
 
     function moveEnemy() {
-        let enemyLeft = enemyShip.offsetLeft
+        let enemyLeft = enemyDevContainer.offsetLeft
 
-        if (enemyShip.offsetLeft <= 0) {
-            enemyShip.innerHTML = ''
-            enemyShip.style.left = '1500px'
+        if (enemyDevContainer.offsetLeft <= 0) {
+            enemyDevContainer.innerHTML = ''
+            enemyDevContainer.style.left = '1500px'
             drawEnemies()
-        } else if (enemyShip.offsetLeft > 0) {
-            enemyLeft -= 2
-            enemyShip.style.left = enemyLeft + 'px'
+        } else if (enemyDevContainer.offsetLeft > 0) {
+            enemyLeft -= 4
+            enemyDevContainer.style.left = enemyLeft + 'px'
         }
         requestAnimationFrame(moveEnemy)
     }
@@ -158,8 +158,8 @@ function initGame() {
     /*    function drawEnemies() {
             let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
             let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
-            enemyShip.innerHTML += `<img class="enemy"  src="images/tie.png">`
-            enemyShip.style.top = randomTop + '%'
+            enemyDevContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
+            enemyDevContainer.style.top = randomTop + '%'
         }*/
 
     function drawEnemies() {
@@ -179,9 +179,9 @@ function initGame() {
 
         for(let i=0;i<objects.length;i++){
             let object=objects[i];
-            document.createElement("img") += object.type
+            enemyDevContainer.innerHTML += object.type
             let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
-            enemyShip.style.top = randomTop + '%'
+            enemyDevContainer.style.top = randomTop + '%'
         }
         spawnRandomObject()
     }
