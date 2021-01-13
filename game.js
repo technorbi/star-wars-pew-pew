@@ -1,7 +1,6 @@
 initGame();
 
 function initGame() {
-
     let theChosenOne = ''
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
@@ -9,8 +8,8 @@ function initGame() {
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
     const enemyDevContainer = document.querySelector('.enemy-container');
+    let allEnemy = []
     singlePlayerButton.addEventListener("click", startGame)
-
 
     function drawShip(theChosenOne) {
         document.body.style.backgroundImage = 'url(images/level1.jpg)'
@@ -44,20 +43,33 @@ function initGame() {
             requestAnimationFrame(shootLaser)
         }
         if (laser.offsetLeft > 2000) {
-            laserContainer.innerHTML =  '';
+            laserContainer.innerHTML = '';
         }
     }
 
+    function moveEnemy() {
+        let enemyLeft = enemyDevContainer.offsetLeft
 
-    function startGame(){
+        if (enemyDevContainer.offsetLeft <= 0) {
+            enemyDevContainer.innerHTML = ''
+            enemyDevContainer.style.left = '1500px'
+            drawEnemies()
+        } else if (enemyDevContainer.offsetLeft > 0) {
+            enemyLeft -= 2
+            enemyDevContainer.style.left = enemyLeft + 'px'
+        }
+        requestAnimationFrame(moveEnemy)
+    }
+
+
+    function startGame() {
 
         // Hide Menu
         if (logoContainer.style.display === "none") {
             logoContainer.style.display = "block";
-            }
-        else {
+        } else {
             logoContainer.style.display = "none";
-            }
+        }
         chooseShip()
     }
 
@@ -88,8 +100,9 @@ function initGame() {
                         shipDevContainer.className += ' vertical'
                     }
                 }
-                move()
                 drawEnemies()
+                move()
+                requestAnimationFrame(moveEnemy)
             })
         }
     }
@@ -139,11 +152,24 @@ function initGame() {
             document.querySelector(playerShipId).src = `images/${playerShipName}.png`
         });
     }
+
     move()
-    function drawEnemies() {
-        let enemyContainer = document.querySelector('.enemy-container');
-        enemyContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
-        enemyDevContainer.className += ' vertical'
-        enemyDevContainer.style.textAlign = 'right'
+
+    /*    function drawEnemies() {
+            let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+            let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
+            enemyDevContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
+            enemyDevContainer.style.top = randomTop + '%'
+        }*/
+    function spawnRandomObject() {
+        let ship = ''
+        let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+        if (Math.random()<0.50){ship=`<img class="enemy"  src="images/tie.png">`;}
+        else{ship=`<img class="enemy"  src="images/tie.png">`;}
+        let object={
+            type: ship,
+            x: percentage[Math.floor(Math.random() * percentage.length)]
+        }
+        allEnemy.push(object)
     }
 }
