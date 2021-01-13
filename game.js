@@ -2,7 +2,7 @@ initGame();
 
 function initGame() {
 
-    const theChosenOne = ''
+    let theChosenOne = ''
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
     const creditsButton = document.querySelector('.credits');
@@ -80,10 +80,9 @@ function initGame() {
 
                 // Hide other ships
                 theChosenOne = '#' + chosenShip
-                drawShip(theChosenOne)
                 for (let shipStyle of ships) {
                     if ('#' + shipStyle.getAttribute('id') !== theChosenOne) {
-                        shipStyle.style.display = 'none'
+                        shipStyle.remove()
                         document.querySelector('.choose').style.display = 'none'
                         shipDevContainer.style.textAlign = 'left'
                         shipDevContainer.className += ' vertical'
@@ -102,7 +101,9 @@ function initGame() {
     }
 
     function move() {
-        let playerShip = document.querySelector('.ship-choose');
+        let playerShip = document.querySelector('.ship-choose')
+        let playerShipId = '#' + document.querySelector('.ship').getAttribute('id')
+        console.log(playerShip)
         let moveBy = 10;
         window.addEventListener('load', () => {
             playerShip.style.left = 0;
@@ -115,13 +116,13 @@ function initGame() {
                 case ('ArrowUp'):
                     if (playerShip.style.top !== '10%') {
                         playerShip.style.top = parseInt(playerShip.style.top) - moveBy + '%';
-                        document.querySelector('#xwing').src = 'images/xwing-up.png'
+                        document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}-up.png`
                     }
                     break;
                 case 'ArrowDown':
                     if (playerShip.style.top !== '90%') {
                         playerShip.style.top = parseInt(playerShip.style.top) + moveBy + '%';
-                        document.querySelector("#xwing").src = 'images/xwing-down.png'
+                        document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}-down.png`
                     }
                     break;
                 case ' ':
@@ -133,7 +134,7 @@ function initGame() {
         });
 
         window.addEventListener('keyup', (e) => {
-            document.querySelector('#xwing').src = 'images/xwing.png'
+            document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}.png`
         });
     }
 }
