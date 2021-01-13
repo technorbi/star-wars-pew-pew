@@ -110,7 +110,7 @@ function initGame() {
         });
 
 
-        window.addEventListener('keyup', (e) => {
+        window.addEventListener('keydown', (e) => {
             switch (e.key) {
                 case ('ArrowUp'):
                     if (playerShip.style.top !== '10%') {
@@ -130,6 +130,10 @@ function initGame() {
                     requestAnimationFrame(shootLaser)
                     break;
             }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            document.querySelector('#xwing').src = 'images/xwing.png'
         });
     }
 }
