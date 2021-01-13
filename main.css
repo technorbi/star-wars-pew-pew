@@ -113,3 +113,13 @@ body {
   -webkit-transform:rotate(-1deg);
   transform:rotate(-2deg);
 }
+
+.enemy-container {
+  position: absolute;
+  top:50%;
+  text-align: right;
+}
+
+.enemy {
+  height: 100px;
+}

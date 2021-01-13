@@ -8,6 +8,7 @@ function initGame() {
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
+    const enemyDevContainer = document.querySelector('.enemy-container');
     singlePlayerButton.addEventListener("click", startGame)
 
 
@@ -88,6 +89,7 @@ function initGame() {
                     }
                 }
                 move()
+                drawEnemies()
             })
         }
     }
@@ -102,8 +104,8 @@ function initGame() {
 
     function move() {
         let playerShip = document.querySelector('.ship-choose')
-        const playerShipId = '#' + document.querySelector('.ship').getAttribute('id')
-        console.log(playerShipId.split('#')[1])
+        const playerShipId = '#' + document.querySelector('.ship').getAttribute('id');
+        const playerShipName = playerShipId.split('#')[1]
         let moveBy = 10;
         window.addEventListener('load', () => {
             playerShip.style.left = 0;
@@ -116,13 +118,13 @@ function initGame() {
                 case ('ArrowUp'):
                     if (playerShip.style.top !== '10%') {
                         playerShip.style.top = parseInt(playerShip.style.top) - moveBy + '%';
-                        document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}-up.png`
+                        document.querySelector(playerShipId).src = `images/${playerShipName}-up.png`
                     }
                     break;
                 case 'ArrowDown':
                     if (playerShip.style.top !== '90%') {
                         playerShip.style.top = parseInt(playerShip.style.top) + moveBy + '%';
-                        document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}-down.png`
+                        document.querySelector(playerShipId).src = `images/${playerShipName}-down.png`
                     }
                     break;
                 case ' ':
@@ -134,8 +136,14 @@ function initGame() {
         });
 
         window.addEventListener('keyup', (e) => {
-            document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}.png`
+            document.querySelector(playerShipId).src = `images/${playerShipName}.png`
         });
     }
     move()
+    function drawEnemies() {
+        let enemyContainer = document.querySelector('.enemy-container');
+        enemyContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
+        enemyDevContainer.className += ' vertical'
+        enemyDevContainer.style.textAlign = 'right'
+    }
 }
