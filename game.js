@@ -7,8 +7,8 @@ function initGame() {
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
-    const enemyDevContainer = document.querySelector('.enemy-container');
-    let allEnemy = []
+    const enemyShip = document.querySelector('.enemy');
+    let objects = []
     singlePlayerButton.addEventListener("click", startGame)
 
     function drawShip(theChosenOne) {
@@ -48,15 +48,15 @@ function initGame() {
     }
 
     function moveEnemy() {
-        let enemyLeft = enemyDevContainer.offsetLeft
+        let enemyLeft = enemyShip.offsetLeft
 
-        if (enemyDevContainer.offsetLeft <= 0) {
-            enemyDevContainer.innerHTML = ''
-            enemyDevContainer.style.left = '1500px'
+        if (enemyShip.offsetLeft <= 0) {
+            enemyShip.innerHTML = ''
+            enemyShip.style.left = '1500px'
             drawEnemies()
-        } else if (enemyDevContainer.offsetLeft > 0) {
+        } else if (enemyShip.offsetLeft > 0) {
             enemyLeft -= 2
-            enemyDevContainer.style.left = enemyLeft + 'px'
+            enemyShip.style.left = enemyLeft + 'px'
         }
         requestAnimationFrame(moveEnemy)
     }
@@ -158,18 +158,31 @@ function initGame() {
     /*    function drawEnemies() {
             let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
             let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
-            enemyDevContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
-            enemyDevContainer.style.top = randomTop + '%'
+            enemyShip.innerHTML += `<img class="enemy"  src="images/tie.png">`
+            enemyShip.style.top = randomTop + '%'
         }*/
-    function spawnRandomObject() {
-        let ship = ''
+
+    function drawEnemies() {
+
         let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
-        if (Math.random()<0.50){ship=`<img class="enemy"  src="images/tie.png">`;}
-        else{ship=`<img class="enemy"  src="images/tie.png">`;}
+
+        function spawnRandomObject() {
+        let ship = ''
+        if (Math.random()<0.50){ship=`<img class="enemy"  src="images/tie.png">`;}else{ship=`<img class="enemy"  src="images/interceptor.png">`;}
         let object={
             type: ship,
-            x: percentage[Math.floor(Math.random() * percentage.length)]
+            x: percentage[Math.floor(Math.random() * percentage.length)],
+            y: 1300
         }
-        allEnemy.push(object)
+        objects.push(object)
+        }
+
+        for(let i=0;i<objects.length;i++){
+            let object=objects[i];
+            document.createElement("img") += object.type
+            let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
+            enemyShip.style.top = randomTop + '%'
+        }
+        spawnRandomObject()
     }
 }
