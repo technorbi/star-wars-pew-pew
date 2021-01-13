@@ -59,7 +59,6 @@ function initGame() {
             }
         chooseShip()
     }
-    move()
 
     function chooseShip(theChosenOne) {
 
@@ -88,6 +87,7 @@ function initGame() {
                         shipDevContainer.className += ' vertical'
                     }
                 }
+                move()
             })
         }
     }
@@ -102,8 +102,8 @@ function initGame() {
 
     function move() {
         let playerShip = document.querySelector('.ship-choose')
-        let playerShipId = '#' + document.querySelector('.ship').getAttribute('id')
-        console.log(playerShip)
+        const playerShipId = '#' + document.querySelector('.ship').getAttribute('id')
+        console.log(playerShipId.split('#')[1])
         let moveBy = 10;
         window.addEventListener('load', () => {
             playerShip.style.left = 0;
@@ -137,4 +137,5 @@ function initGame() {
             document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}.png`
         });
     }
+    move()
 }
