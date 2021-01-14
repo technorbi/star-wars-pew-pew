@@ -56,7 +56,7 @@ function initGame() {
         for (let enemy of enemyContainer) {
             let enemyLeft = enemy.offsetLeft
             if (enemy.offsetLeft <= 0) {
-                enemyContainer.innerHTML = ''
+                enemy.remove()
                 enemy.style.left = '1500px'
             } else if (enemy.offsetLeft > 0) {
                 enemyLeft -= 4
@@ -102,6 +102,7 @@ function initGame() {
                         document.querySelector('.choose').style.display = 'none'
                         shipDevContainer.style.textAlign = 'left'
                         shipDevContainer.className += ' vertical'
+
                     }
                 }
                 drawEnemies()
@@ -155,14 +156,6 @@ function initGame() {
         });
     }
 
-
-    /*    function drawEnemies() {
-            let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
-            let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
-            enemyDevContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
-            enemyDevContainer.style.top = randomTop + '%'
-        }*/
-
     function drawEnemies() {
 
         let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -182,10 +175,10 @@ function initGame() {
                 html: ship,
                 x: percentage[Math.floor(Math.random() * percentage.length)],
                 y: 1300
-
             }
             objects.push(object)
         }
+
         spawnRandomObject()
 
         let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
@@ -195,6 +188,7 @@ function initGame() {
             const enemyContainers = document.querySelectorAll('.enemy-container');
             const container = enemyContainers[enemyContainers.length - 1]
             container.style.top = randomTop + '%'
+
         }
 
     }
