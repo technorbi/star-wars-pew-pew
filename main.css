@@ -22,7 +22,6 @@ body {
   height: 30px;
   margin: 0;
   position: absolute;
-  top: 49%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   left: 330px;
@@ -128,11 +127,14 @@ body {
   position: absolute;
   left: 1500px;
   top: 50%;
-  width: 100px;
-  height: 100px;
+  width: 150px;
   text-align: right;
 }
 
-.enemy {
-  height: 100px;
+.tie {
+  width: 150px;
+}
+
+.interceptor {
+  width: 300px;
 }
