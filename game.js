@@ -8,7 +8,7 @@ function initGame() {
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
-    const enemyDevContainer = document.querySelector('.enemy-container');
+
     const bigContainer = document.querySelector('.container')
     let objects = []
     singlePlayerButton.addEventListener("click", startGame)
@@ -50,15 +50,20 @@ function initGame() {
     }
 
     function moveEnemy() {
-        let enemyLeft = enemyDevContainer.offsetLeft
-        if (enemyDevContainer.offsetLeft <= 0) {
-            enemyDevContainer.innerHTML = ''
-            enemyDevContainer.style.left = '1500px'
-        } else if (enemyDevContainer.offsetLeft > 0) {
-            enemyLeft -= 3
-            enemyDevContainer.style.left = enemyLeft + 'px'
+
+        const enemyContainer = document.querySelectorAll('.enemy-container');
+
+        for (let enemy of enemyContainer) {
+            let enemyLeft = enemy.offsetLeft
+            if (enemy.offsetLeft <= 0) {
+                enemyContainer.innerHTML = ''
+                enemy.style.left = '1500px'
+            } else if (enemy.offsetLeft > 0) {
+                enemyLeft -= 4
+                enemy.style.left = enemyLeft + 'px'
+            }
+            requestAnimationFrame(moveEnemy)
         }
-        requestAnimationFrame(moveEnemy)
     }
 
 
@@ -166,26 +171,31 @@ function initGame() {
             let ship = ''
             if (Math.random() < 0.50) {
                 ship = `<div class="enemy-container">
-                                            <img class="enemy"  src="images/tie.png">`;
+                                            <img class="enemy"  src="images/tie.png"/>
+                        </div>`;
             } else {
                 ship = `<div class="enemy-container">
-                                            <img class="enemy"  src="images/interceptor.png">`;
+                                            <img class="enemy"  src="images/interceptor.png"/>
+                        </div>`;
             }
             let object = {
-                type: ship,
+                html: ship,
                 x: percentage[Math.floor(Math.random() * percentage.length)],
                 y: 1300
+
             }
             objects.push(object)
         }
-
-        for (let i = 0; i < objects.length; i++) {
-            let object = objects[i];
-            console.log(objects)
-            bigContainer.innerHTML += object.type
-            let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
-            enemyDevContainer.style.top = randomTop + '%'
-        }
         spawnRandomObject()
+
+        let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
+
+        for (let object of objects) {
+            bigContainer.innerHTML += object.html
+            const enemyContainers = document.querySelectorAll('.enemy-container');
+            const container = enemyContainers[enemyContainers.length - 1]
+            container.style.top = randomTop + '%'
+        }
+
     }
 }
