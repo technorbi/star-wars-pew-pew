@@ -1,6 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
 
+.screen {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   background-image: url("images/menu-background.jpg");
   background-size: cover;
@@ -112,4 +117,22 @@ body {
   color: #ff0202;
   -webkit-transform:rotate(-1deg);
   transform:rotate(-2deg);
+}
+
+.container{
+  width: 120%;
+  height: 120%;
+}
+
+.enemy-container {
+  position: absolute;
+  left: 1500px;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  text-align: right;
+}
+
+.enemy {
+  height: 100px;
 }

@@ -1,15 +1,16 @@
 initGame();
 
 function initGame() {
-
     let theChosenOne = ''
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
+    const enemyDevContainer = document.querySelector('.enemy-container');
+    const bigContainer = document.querySelector('.container')
+    let objects = []
     singlePlayerButton.addEventListener("click", startGame)
-
 
     function drawShip(theChosenOne) {
         document.body.style.backgroundImage = 'url(images/level1.jpg)'
@@ -43,20 +44,31 @@ function initGame() {
             requestAnimationFrame(shootLaser)
         }
         if (laser.offsetLeft > 2000) {
-            laserContainer.innerHTML =  '';
+            laserContainer.innerHTML = '';
         }
     }
 
+    function moveEnemy() {
+        let enemyLeft = enemyDevContainer.offsetLeft
+        if (enemyDevContainer.offsetLeft <= 0) {
+            enemyDevContainer.innerHTML = ''
+            enemyDevContainer.style.left = '1500px'
+        } else if (enemyDevContainer.offsetLeft > 0) {
+            enemyLeft -= 3
+            enemyDevContainer.style.left = enemyLeft + 'px'
+        }
+        requestAnimationFrame(moveEnemy)
+    }
 
-    function startGame(){
+
+    function startGame() {
 
         // Hide Menu
         if (logoContainer.style.display === "none") {
             logoContainer.style.display = "block";
-            }
-        else {
+        } else {
             logoContainer.style.display = "none";
-            }
+        }
         chooseShip()
     }
 
@@ -87,7 +99,9 @@ function initGame() {
                         shipDevContainer.className += ' vertical'
                     }
                 }
+                drawEnemies()
                 move()
+                requestAnimationFrame(moveEnemy)
             })
         }
     }
@@ -102,8 +116,8 @@ function initGame() {
 
     function move() {
         let playerShip = document.querySelector('.ship-choose')
-        const playerShipId = '#' + document.querySelector('.ship').getAttribute('id')
-        console.log(playerShipId.split('#')[1])
+        const playerShipId = '#' + document.querySelector('.ship').getAttribute('id');
+        const playerShipName = playerShipId.split('#')[1]
         let moveBy = 10;
         window.addEventListener('load', () => {
             playerShip.style.left = 0;
@@ -116,13 +130,13 @@ function initGame() {
                 case ('ArrowUp'):
                     if (playerShip.style.top !== '10%') {
                         playerShip.style.top = parseInt(playerShip.style.top) - moveBy + '%';
-                        document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}-up.png`
+                        document.querySelector(playerShipId).src = `images/${playerShipName}-up.png`
                     }
                     break;
                 case 'ArrowDown':
                     if (playerShip.style.top !== '90%') {
                         playerShip.style.top = parseInt(playerShip.style.top) + moveBy + '%';
-                        document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}-down.png`
+                        document.querySelector(playerShipId).src = `images/${playerShipName}-down.png`
                     }
                     break;
                 case ' ':
@@ -134,8 +148,44 @@ function initGame() {
         });
 
         window.addEventListener('keyup', (e) => {
-            document.querySelector(playerShipId).src = `images/${playerShipId.split('#')[1]}.png`
+            document.querySelector(playerShipId).src = `images/${playerShipName}.png`
         });
     }
+
     move()
+
+    /*    function drawEnemies() {
+            let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+            let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
+            enemyDevContainer.innerHTML += `<img class="enemy"  src="images/tie.png">`
+            enemyDevContainer.style.top = randomTop + '%'
+        }*/
+
+    function drawEnemies() {
+
+        let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+        function spawnRandomObject() {
+        let ship = ''
+        if (Math.random()<0.50){ship=`<div class="enemy-container">
+                                            <img class="enemy"  src="images/tie.png">`;}
+        else{                   ship=`<div class="enemy-container">
+                                            <img class="enemy"  src="images/interceptor.png">`;}
+        let object={
+            type: ship,
+            x: percentage[Math.floor(Math.random() * percentage.length)],
+            y: 1300
+        }
+        objects.push(object)
+        }
+
+        for(let i=0;i<objects.length;i++){
+            let object=objects[i];
+            console.log(objects)
+            bigContainer.innerHTML += object.type
+            let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
+            enemyDevContainer.style.top = randomTop + '%'
+        }
+        spawnRandomObject()
+    }
 }
