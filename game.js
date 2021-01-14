@@ -1,6 +1,7 @@
 initGame();
 
 function initGame() {
+
     let theChosenOne = ''
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
@@ -72,7 +73,7 @@ function initGame() {
         chooseShip()
     }
 
-    function chooseShip(theChosenOne) {
+    function chooseShip() {
 
         // Display
         const shipChoose = document.querySelector('.ship-choose')
@@ -83,16 +84,15 @@ function initGame() {
         const ships = document.querySelectorAll('.ship')
 
         // Eventlisteners
-        let chosenShip = ''
+        let chosenShipId = ''
 
         for (let ship of ships) {
             ship.addEventListener('click', function () {
-                chosenShip = ship.getAttribute('id')
+                chosenShipId = ship.id
 
                 // Hide other ships
-                theChosenOne = '#' + chosenShip
                 for (let shipStyle of ships) {
-                    if ('#' + shipStyle.getAttribute('id') !== theChosenOne) {
+                    if (shipStyle.id !== chosenShipId) {
                         shipStyle.remove()
                         document.querySelector('.choose').style.display = 'none'
                         shipDevContainer.style.textAlign = 'left'
@@ -100,7 +100,7 @@ function initGame() {
                     }
                 }
                 drawEnemies()
-                move()
+                initMove()
                 requestAnimationFrame(moveEnemy)
             })
         }
@@ -114,15 +114,13 @@ function initGame() {
 
     }
 
-    function move() {
+    function initMove() {
         let playerShip = document.querySelector('.ship-choose')
         const playerShipId = '#' + document.querySelector('.ship').getAttribute('id');
         const playerShipName = playerShipId.split('#')[1]
         let moveBy = 10;
-        window.addEventListener('load', () => {
-            playerShip.style.left = 0;
-            playerShip.style.top = '50%';
-        });
+        playerShip.style.left = 0;
+        playerShip.style.top = '50%';
 
 
         window.addEventListener('keydown', (e) => {
@@ -152,7 +150,6 @@ function initGame() {
         });
     }
 
-    move()
 
     /*    function drawEnemies() {
             let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -166,21 +163,24 @@ function initGame() {
         let percentage = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 
         function spawnRandomObject() {
-        let ship = ''
-        if (Math.random()<0.50){ship=`<div class="enemy-container">
-                                            <img class="enemy"  src="images/tie.png">`;}
-        else{                   ship=`<div class="enemy-container">
-                                            <img class="enemy"  src="images/interceptor.png">`;}
-        let object={
-            type: ship,
-            x: percentage[Math.floor(Math.random() * percentage.length)],
-            y: 1300
-        }
-        objects.push(object)
+            let ship = ''
+            if (Math.random() < 0.50) {
+                ship = `<div class="enemy-container">
+                                            <img class="enemy"  src="images/tie.png">`;
+            } else {
+                ship = `<div class="enemy-container">
+                                            <img class="enemy"  src="images/interceptor.png">`;
+            }
+            let object = {
+                type: ship,
+                x: percentage[Math.floor(Math.random() * percentage.length)],
+                y: 1300
+            }
+            objects.push(object)
         }
 
-        for(let i=0;i<objects.length;i++){
-            let object=objects[i];
+        for (let i = 0; i < objects.length; i++) {
+            let object = objects[i];
             console.log(objects)
             bigContainer.innerHTML += object.type
             let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
