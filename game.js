@@ -2,15 +2,21 @@ initGame();
 
 function initGame() {
 
-    let objects = []
+
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
     const creditsButton = document.querySelector('.credits');
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
     const bigContainer = document.querySelector('.container')
-    let playerLife = 5
-    let playerScore = 0
+    let playerLife = document.querySelector('.lifescore')
+    let playerScore = document.querySelector('.highscore')
+    let currentScore = 0
+    let objects = []
+
+    window.addEventListener("click", function () {
+        logoContainer.style.visibility = 'visible'
+    })
 
     singlePlayerButton.addEventListener("click", startGame)
 
@@ -60,8 +66,9 @@ function initGame() {
         for (let enemy of enemyContainer) {
             if (isColliding(laser, enemy) && laser.offsetLeft > enemy.offsetLeft) {
                 enemy.remove()
-                playerScore += 100
-                drawEnemies()
+                laser.remove()
+                currentScore += 100
+                playerScore.innerHTML = 'Score: ' + currentScore
             }
         }
     }
@@ -75,7 +82,6 @@ function initGame() {
             if (isColliding(shipContainer, enemy) && shipContainer.offsetLeft > enemy.offsetLeft) {
                 enemy.remove()
                 playerLife -= 1
-                drawEnemies()
             }
         }
     }
@@ -103,12 +109,14 @@ function initGame() {
 
     function startGame() {
 
+        document.querySelector('.intro').remove()
         // Hide Menu
         if (logoContainer.style.display === "none") {
             logoContainer.style.display = "block";
         } else {
             logoContainer.style.display = "none";
         }
+
         chooseShip()
     }
 
@@ -139,8 +147,13 @@ function initGame() {
 
                     }
                 }
+                document.body.style.backgroundImage = 'url(images/menu-background.jpg)'
+                playerScore.style.visibility = 'visible'
+                playerLife.style.visibility = 'visible'
                 initMove()
-                drawEnemies()
+                moveEnemy()
+                setInterval(drawEnemies, 2000)
+                setInterval(drawEnemies, 6000)
                 checkShipCollide()
                 if (removedEnemy) {
                     drawEnemies()
@@ -216,6 +229,8 @@ function initGame() {
             x: percentage[Math.floor(Math.random() * percentage.length)],
             y: 1300
         }
+
+        objects = []
         objects.push(object)
 
         let randomTop = percentage[Math.floor(Math.random() * percentage.length)];
@@ -225,6 +240,7 @@ function initGame() {
             const enemyContainers = document.querySelectorAll('.enemy-container');
             const container = enemyContainers[enemyContainers.length - 1]
             container.style.top = randomTop + '%'
+            console.log(objects)
             if (removedEnemy) {
                 objects.pop()
             }
@@ -237,24 +253,21 @@ function initGame() {
                 enemy.remove()
                 removedEnemy = true
             }
-            moveEnemy()
         }
+    }
 
-
-        function moveEnemy() {
-
-            removedEnemy = false
-            const enemyContainer = document.querySelectorAll('.enemy-container');
-            for (let enemy of enemyContainer) {
-                let enemyLeft = enemy.offsetLeft
-                if (enemy.offsetLeft <= 0) {
-                    enemy.style.left = '1500px'
-                } else if (enemy.offsetLeft > 0) {
-                    enemyLeft -= 1
-                    enemy.style.left = enemyLeft + 'px'
-                }
+    function moveEnemy() {
+        removedEnemy = false
+        const enemyContainer = document.querySelectorAll('.enemy-container');
+        for (let enemy of enemyContainer) {
+            let enemyLeft = enemy.offsetLeft
+            if (enemy.offsetLeft <= 0) {
+                enemy.style.left = '2000px'
+            } else if (enemy.offsetLeft > 0) {
+                enemyLeft -= 2
+                enemy.style.left = enemyLeft + 'px'
             }
-            requestAnimationFrame(moveEnemy)
         }
+        requestAnimationFrame(moveEnemy)
     }
 }
