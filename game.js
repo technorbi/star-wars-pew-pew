@@ -2,7 +2,6 @@ initGame();
 
 function initGame() {
 
-    let theChosenOne = ''
     let objects = []
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
@@ -10,6 +9,8 @@ function initGame() {
     const logoContainer = document.querySelector('.logo-container');
     const shipDevContainer = document.querySelector('.ship-choose');
     const bigContainer = document.querySelector('.container')
+    let playerLife = 5
+    let playerScore = 0
 
     singlePlayerButton.addEventListener("click", startGame)
 
@@ -51,31 +52,6 @@ function initGame() {
         checkLaserHit()
     }
 
-    function enemyShootLaser() {
-
-        const enemyLaserContainer = document.querySelector('.enemy-laser-container')
-        const enemyLaser = document.querySelector('.enemy-laser-shoot')
-
-        let shipTop = shipDevContainer.offsetTop
-
-        enemyLaser.classList.remove('hidden')
-        let left = enemyLaser.offsetLeft
-        left += 20
-        enemyLaser.style.left = left + 'px'
-        if (enemyLaser.offsetLeft > 350) {
-            enemyLaser.offsetTop = originalShootTop
-        } else {
-            enemyLaser.style.top = shipTop - 10 + 'px'
-        }
-        if (enemyLaser.offsetLeft < 2000) {
-            requestAnimationFrame(shootLaser)
-        }
-        if (enemyLaser.offsetLeft > 2000) {
-            enemyLaserContainer.innerHTML = '';
-        }
-        checkLaserHit()
-    }
-
     function checkLaserHit() {
 
         const laser = document.querySelector('.laser-shoot')
@@ -84,6 +60,21 @@ function initGame() {
         for (let enemy of enemyContainer) {
             if (isColliding(laser, enemy) && laser.offsetLeft > enemy.offsetLeft) {
                 enemy.remove()
+                playerScore += 100
+                drawEnemies()
+            }
+        }
+    }
+
+    function checkShipCollide() {
+
+        const shipContainer = document.querySelector('.ship');
+        const enemyContainer = document.querySelectorAll('.enemy-container');
+
+        for (let enemy of enemyContainer) {
+            if (isColliding(shipContainer, enemy) && shipContainer.offsetLeft > enemy.offsetLeft) {
+                enemy.remove()
+                playerLife -= 1
                 drawEnemies()
             }
         }
@@ -150,9 +141,11 @@ function initGame() {
                 }
                 initMove()
                 drawEnemies()
+                checkShipCollide()
                 if (removedEnemy) {
                     drawEnemies()
                 }
+
 
             })
         }
@@ -233,7 +226,7 @@ function initGame() {
             const container = enemyContainers[enemyContainers.length - 1]
             container.style.top = randomTop + '%'
             if (removedEnemy) {
-                objects.remove(object)
+                objects.pop()
             }
         }
 
