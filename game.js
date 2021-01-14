@@ -152,8 +152,9 @@ function initGame() {
                 playerLife.style.visibility = 'visible'
                 initMove()
                 moveEnemy()
-                setInterval(drawEnemies, 2000)
+                setInterval(drawEnemies, 1500)
                 setInterval(drawEnemies, 6000)
+                setInterval(drawEnemies, 12000)
                 checkShipCollide()
                 if (removedEnemy) {
                     drawEnemies()
