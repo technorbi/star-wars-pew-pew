@@ -1,3 +1,5 @@
+let SHIP_ONE_INTERVAL, SHIP_TWO_INTERVAL, SHIP_THREE_INTERVAL
+
 initGame();
 
 function initGame() {
@@ -13,9 +15,9 @@ function initGame() {
     let currentScore = 0
     let objects = []
 
-    let SHIP_ONE_INTERVAL = 1500
-    let SHIP_TWO_INTERVAL = 6000
-    let SHIP_THREE_INTERVAL = 12000
+    SHIP_ONE_INTERVAL = 1500
+    SHIP_TWO_INTERVAL = 6000
+    SHIP_THREE_INTERVAL = 12000
 
     window.addEventListener("click", function () {
         logoContainer.style.visibility = 'visible'
@@ -163,19 +165,19 @@ function initGame() {
                 moveEnemy()
 
                 if (playerScore > 3000) {
-                    SHIP_ONE_INTERVAL = 1000
-                    SHIP_TWO_INTERVAL = 5000
-                    SHIP_THREE_INTERVAL = 8000
+                    window.SHIP_ONE_INTERVAL = 1000
+                    window.SHIP_TWO_INTERVAL = 5000
+                    window.SHIP_THREE_INTERVAL = 8000
                 }
                 if (playerScore > 10000) {
-                    SHIP_ONE_INTERVAL = 500
-                    SHIP_TWO_INTERVAL = 3000
-                    SHIP_THREE_INTERVAL = 6000
+                    window.SHIP_ONE_INTERVAL = 500
+                    window.SHIP_TWO_INTERVAL = 3000
+                    window.SHIP_THREE_INTERVAL = 6000
                 }
                 if (playerScore > 20000) {
-                    SHIP_ONE_INTERVAL = 5000
-                    SHIP_TWO_INTERVAL = 3000
-                    SHIP_THREE_INTERVAL = 5000
+                    window.SHIP_ONE_INTERVAL = 5000
+                    window.SHIP_TWO_INTERVAL = 3000
+                    window.SHIP_THREE_INTERVAL = 5000
                 }
 
                 console.log(playerScore)
