@@ -2,7 +2,6 @@ initGame();
 
 function initGame() {
 
-
     const singlePlayerButton = document.querySelector('.single');
     const highScoreButton = document.querySelector('.high-score');
     const creditsButton = document.querySelector('.credits');
@@ -13,6 +12,10 @@ function initGame() {
     let playerScore = document.querySelector('.highscore')
     let currentScore = 0
     let objects = []
+
+    let SHIP_ONE_INTERVAL = 1500
+    let SHIP_TWO_INTERVAL = 6000
+    let SHIP_THREE_INTERVAL = 12000
 
     window.addEventListener("click", function () {
         logoContainer.style.visibility = 'visible'
@@ -25,10 +28,7 @@ function initGame() {
         const playerShip = document.querySelector(theChosenOne)
         playerShip.style.transform = 'scale(1)'
         playerShip.style.margin = 'auto'
-        let audio = new Audio('sounds/xwing-fly.mp3')
-        audio.volume = 0.07
-        audio.loop = true
-        // audio.play()
+
     }
 
     const originalShootTop = shipDevContainer.offsetTop - 10 + 'px'
@@ -79,7 +79,9 @@ function initGame() {
         const enemyContainer = document.querySelectorAll('.enemy-container');
 
         for (let enemy of enemyContainer) {
-            if (isColliding(shipContainer, enemy) && shipContainer.offsetLeft > enemy.offsetLeft) {
+            console.log(enemy.offsetTop)
+            console.log(shipContainer.offsetTop)
+            if (isColliding(enemy, shipContainer) < 100 && shipContainer.offsetLeft > enemy.offsetLeft) {
                 enemy.remove()
                 playerLife -= 1
             }
@@ -122,6 +124,8 @@ function initGame() {
 
     function chooseShip() {
 
+        let playerScore = document.querySelector('.highscore')
+
         // Display
         const shipChoose = document.querySelector('.ship-choose')
 
@@ -150,12 +154,36 @@ function initGame() {
                 document.body.style.backgroundImage = 'url(images/menu-background.jpg)'
                 playerScore.style.visibility = 'visible'
                 playerLife.style.visibility = 'visible'
+                let audio = new Audio('sounds/xwing-fly.mp3')
+                audio.volume = 0.07
+                audio.loop = true
+                audio.play()
+
                 initMove()
                 moveEnemy()
-                setInterval(drawEnemies, 1500)
-                setInterval(drawEnemies, 6000)
-                setInterval(drawEnemies, 12000)
-                checkShipCollide()
+
+                if (playerScore > 3000) {
+                    SHIP_ONE_INTERVAL = 1000
+                    SHIP_TWO_INTERVAL = 5000
+                    SHIP_THREE_INTERVAL = 8000
+                }
+                if (playerScore > 10000) {
+                    SHIP_ONE_INTERVAL = 500
+                    SHIP_TWO_INTERVAL = 3000
+                    SHIP_THREE_INTERVAL = 6000
+                }
+                if (playerScore > 20000) {
+                    SHIP_ONE_INTERVAL = 5000
+                    SHIP_TWO_INTERVAL = 3000
+                    SHIP_THREE_INTERVAL = 5000
+                }
+
+                console.log(playerScore)
+                setInterval(drawEnemies, SHIP_ONE_INTERVAL)
+                setInterval(drawEnemies, SHIP_TWO_INTERVAL)
+                setInterval(drawEnemies, SHIP_THREE_INTERVAL)
+
+                setInterval(checkShipCollide, 100)
                 if (removedEnemy) {
                     drawEnemies()
                 }
@@ -165,9 +193,6 @@ function initGame() {
         }
     }
 
-    function goBack() {
-
-    }
 
     function showHighScore() {
 
@@ -266,6 +291,12 @@ function initGame() {
                 enemy.style.left = '2000px'
             } else if (enemy.offsetLeft > 0) {
                 enemyLeft -= 2
+                if (playerScore > 10000){
+                    enemyLeft = 3
+                }
+                if (playerScore > 20000) {
+                    enemyLeft = 4
+                }
                 enemy.style.left = enemyLeft + 'px'
             }
         }
